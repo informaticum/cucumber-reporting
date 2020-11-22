@@ -33,7 +33,7 @@ public class Configuration {
     private List<PresentationMode> presentationModes = new ArrayList<>();
     private List<String> classificationFiles;
 
-    private Set<Status> notFailingStatuses = Collections.emptySet();
+    private EnumSet<Status> notFailingStatuses = EnumSet.noneOf(Status.class);
 
     private Map<String, String> qualifiers = new Hashtable<>();
 
@@ -295,7 +295,7 @@ public class Configuration {
      * Gets statuses which do not fail scenario.
      */
     public Set<Status> getNotFailingStatuses() {
-        return notFailingStatuses;
+        return EnumSet.copyOf(this.notFailingStatuses);
     }
 
     /**
@@ -304,7 +304,7 @@ public class Configuration {
      */
     public void setNotFailingStatuses(Set<Status> notFailingStatuses) {
         if (notFailingStatuses != null) {
-            this.notFailingStatuses = notFailingStatuses;
+            this.notFailingStatuses = EnumSet.copyOf(notFailingStatuses);
         }
     }
 
