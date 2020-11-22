@@ -16,6 +16,7 @@ import net.masterthought.cucumber.sorting.SortingMethod;
 
 /**
  * @author Damian Szczepanik (damianszczepanik@github)
+ * @author <a href="https://github.com/ghostcity">Stefan Gasterstädt</a>
  */
 public class ConfigurationTest {
 
@@ -420,4 +421,37 @@ public class ConfigurationTest {
         // then
         assertThat(configuration.getNotFailingStatuses()).containsExactly(notFailingStatus);
     }
+
+    @Test
+    public void setNotFailingStatuses_WithoutPostManipulation() {
+
+        // given
+        Configuration configuration = new Configuration(outputDirectory, projectName);
+        Status notFailingStatus = Status.SKIPPED;
+        Set<Status> notFailingStatuses = EnumSet.of(notFailingStatus);
+
+        // when
+        configuration.setNotFailingStatuses(notFailingStatuses);
+        notFailingStatuses.add(Status.PASSED);
+
+        // then
+        assertThat(configuration.getNotFailingStatuses()).containsExactly(notFailingStatus);
+    }
+
+    @Test
+    public void getNotFailingStatuses_WithoutPostManipulation() {
+
+        // given
+        Configuration configuration = new Configuration(outputDirectory, projectName);
+        Status notFailingStatus = Status.SKIPPED;
+        configuration.setNotFailingStatuses(EnumSet.of(notFailingStatus));
+
+        // when
+        Set<Status> notFailingStatuses = configuration.getNotFailingStatuses();
+        notFailingStatuses.add(Status.PASSED);
+
+        // then
+        assertThat(configuration.getNotFailingStatuses()).containsExactly(notFailingStatus);
+    }
+
 }
