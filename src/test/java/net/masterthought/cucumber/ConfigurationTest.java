@@ -137,6 +137,20 @@ public class ConfigurationTest {
     }
 
     @Test
+    public void getTagsToExcludeFromChart_WithoutPostManipulation() {
+
+        // given
+        Configuration configuration = new Configuration(outputDirectory, projectName);
+
+        // when
+        Collection<Pattern> patterns = configuration.getTagsToExcludeFromChart();
+        patterns.add(Pattern.compile("@some.Regex.Pattern"));
+
+        // then
+        assertThat(configuration.getTagsToExcludeFromChart()).isEmpty();
+    }
+
+    @Test
     public void getTagsToExcludeFromChart_ReturnsEmptyList() {
 
         // given
