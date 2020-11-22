@@ -176,7 +176,7 @@ public class Configuration {
      * @return Patterns to be used to filter out tags in the 'Tags Overview' chart. Returns an empty list by default.
      */
     public Collection<Pattern> getTagsToExcludeFromChart() {
-        return tagsToExcludeFromChart;
+        return new ArrayList<>(tagsToExcludeFromChart);
     }
 
     /**
